@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Car Search</h1>
+<form method="get" action="{% url 'carView' %}">
+    <input type="text" name="q" placeholder="Search by title or description">
+    <select name="category">
+        <option value="" selected>All categories</option>
+        {% for category in categories %}
+        <option value="{{ category.name }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+    <select name="marka">
+        <option value="" selected>All brands</option>
+        {% for marka in marks %}
+        <option value="{{ marka.title }}">{{ marka.title }}</option>
+        {% endfor %}
+    </select>
+    <select name="year">
+        <option value="" selected>All years</option>
+        {% for year in years %}
+        <option value="{{ year }}">{{ year }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+    {% for p in car %}
+    <li>
+        <a href="{% url 'carDetailView' p.pk  %}">{{ p.name }}</a>
+        <p>{{ p.price }} $</p>
+         {% if p.image %}
+            <img src="{{ p.image.url }}" alt="img">
+         {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+
+<button onclick="window.location.href='{% url 'carCreateView' %}'">Add new car</button>
+<button onclick="window.location.href='{% url 'categoryView' %}'">Category</button>
+<button onclick="window.location.href='{% url 'markaView' %}'">Marka</button>
+
+</body>
+</html>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+li {
+  margin: 10px;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: calc(33.333% - 20px);
+  text-align: center;
+}
+
+li p {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 5px;
+}
+
+li img {
+  width: 55%;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+button {
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+
+@media (max-width: 768px) {
+  li {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 480px) {
+  li {
+    width: 100%;
+  }
+}
+</style>

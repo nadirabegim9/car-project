@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Marka: </h2>
+{% for p in marka %}
+<div class="product-detail">
+  <div class="product-image">
+
+         {% if p.image %}
+            <img src="{{ p.image.url }}" alt="img">
+         {% endif %}
+  </div>
+  <div class="product-info">
+    <ul>
+        <li>
+            <a href="{% url 'carView' %}">{{ p.title }}</a>
+            <button onclick="window.location.href='{% url 'markaDeleteView' p.pk %}'">Delete</button>
+        </li>
+    </ul>
+  </div>
+</div>
+{% endfor %}
+
+<button onclick="window.location.href='{% url 'markaCreateView' %}'">Add new marka</button>
+<button onclick="window.location.href='{% url 'carView' %}'">Cansel to list</button>
+
+</body>
+</html>
+
+
+<style>
+  button {
+  display: start;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+.product-detail {
+    display: flex;
+}
+
+.product-image {
+  flex: 1;
+  margin-right: -580px;
+}
+
+.product-info {
+  flex: 2;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+img {
+  max-width: 15%;
+  height: auto;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+</style>

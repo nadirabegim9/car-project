@@ -1,0 +1,80 @@
+<div class="product-detail">
+  <div class="product-image">
+    {% if car.image %}
+      <img src="{{ car.image.url }}" alt="{{ car.name }}">
+    {% endif %}
+  </div>
+  <div class="product-info">
+    <h1>{{ car.name }}</h1>
+    <p>{{ car.description }}</p>
+    <p class="price">Price: {{ car.price }} $</p>
+    <p class="year">Year: {{ car.year }}</p>
+    <p class="category">Category: {{ car.category }}</p>
+    <p class="marka">Marka: {{ car.marka }}</p>
+  </div>
+</div>
+
+<h2>Comments:</h2>
+<ul>
+  {% for com in car.comment_set.all %}
+    <li>
+      <p>{{ com.user }}</p>
+      <p>{{ com.text }}</p>
+      <p>{{ com.created_date }}</p>
+    </li>
+  {% endfor %}
+</ul>
+
+<button onclick="window.location.href='{% url 'commentCreateView' car.pk %}'">Add feedback</button>
+<button onclick="window.location.href='{% url 'carUpdateView' car.pk %}'">Update</button>
+<button onclick="window.location.href='{% url 'carDeleteView' car.pk %}'">Delete</button>
+<button onclick="window.location.href='{% url 'carView' %}'">Cansel to list</button>
+
+
+
+<style>
+  button {
+  display: start;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+.product-detail {
+  display: flex;
+  align-items: center;
+}
+
+.product-image {
+  flex: 1;
+  margin-right: 2rem;
+}
+
+.product-info {
+  flex: 2;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+</style>

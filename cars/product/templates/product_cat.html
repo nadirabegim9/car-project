@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h2>Category: </h2>
+<ul>
+    {% for p in category %}
+    <li>
+        <a href="{% url 'carView' %}">{{ p.name }}</a>
+        <button onclick="window.location.href='{% url 'categoryDeleteView' p.pk %}'">Delete</button>
+    </li>
+    {% endfor %}
+</ul>
+<button onclick="window.location.href='{% url 'categoryCreateView' %}'">Add new category</button>
+<button onclick="window.location.href='{% url 'carView' %}'">Cansel to list</button>
+
+</body>
+</html>
+
+
+<style>
+  button {
+  display: start;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3e8e41;
+}
+.product-detail {
+  display: flex;
+  align-items: center;
+}
+
+.product-image {
+  flex: 1;
+  margin-right: 2rem;
+}
+
+.product-info {
+  flex: 2;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+</style>
